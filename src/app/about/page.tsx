@@ -1,7 +1,8 @@
 "use client";
+import './about.css';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { Quote, ChevronLeft, ChevronRight, Star, Coffee, MapPin } from 'lucide-react';
 
 export default function About() {
   const [currentReview, setCurrentReview] = useState(0);
@@ -26,6 +27,20 @@ export default function About() {
       name: "Sophia Lin",
       role: "Coffee Enthusiast",
       text: "I've tasted coffee all over the world, and DND Cafe holds its own against the best. The dark, moody ambiance perfectly complements their exceptional, ethically sourced roasts.",
+      rating: 5
+    },
+    {
+      id: 4,
+      name: "James Sterling",
+      role: "Photographer",
+      text: "The lighting here is just as curated as the coffee. It's the perfect place to edit my photos while enjoying the incredible Velvet Chaos Latte. Truly a hidden gem.",
+      rating: 5
+    },
+    {
+      id: 5,
+      name: "Olivia Chen",
+      role: "Graphic Designer",
+      text: "DND Cafe is where I go when I need to escape creative blocks. The artisanal pastries and The Midnight Brew are literal perfection. I love the premium feel of the place.",
       rating: 5
     }
   ];
@@ -82,36 +97,95 @@ export default function About() {
         </div>
       </section>
 
+      {/* The DND Philosophy */}
+      <section className="philosophy-section">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="section-title">Our <span className="text-gradient">Philosophy</span></h2>
+            <p className="text-muted max-w-2xl mx-auto mt-4">The core pillars that elevate every cup we serve.</p>
+          </div>
+          <div className="philosophy-grid">
+            <div className="philosophy-card">
+              <div className="icon-wrapper"><Coffee size={32} className="text-gold" /></div>
+              <h3>Ethical Sourcing</h3>
+              <p>We partner directly with small-scale farmers, ensuring fair wages and sustainable agricultural practices that respect the earth.</p>
+            </div>
+            <div className="philosophy-card">
+              <div className="icon-wrapper"><Star size={32} className="text-gold" /></div>
+              <h3>Artisanal Roasting</h3>
+              <p>Every small batch takes a unique journey in our roasters, meticulously monitored to bring out the specific symphony of flavors in the bean.</p>
+            </div>
+            <div className="philosophy-card">
+              <div className="icon-wrapper"><MapPin size={32} className="text-gold" /></div>
+              <h3>Curated Ambiance</h3>
+              <p>We designed our space to be the perfect backdrop for your thoughts, conversations, and moments of quiet brilliance.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Meet the Artisans */}
+      <section className="artisans-section">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="section-title">Meet the <span className="text-gradient">Artisans</span></h2>
+            <p className="text-muted max-w-2xl mx-auto mt-4">The passionate individuals behind your perfect brew.</p>
+          </div>
+          <div className="artisans-grid">
+            <div className="artisan-card">
+              <div className="artisan-visual">
+                <Image src="/images/hero.png" alt="Head Roaster" fill style={{objectFit: 'cover'}} />
+              </div>
+              <div className="artisan-info">
+                <h3>Julian Hayes</h3>
+                <span className="artisan-role">Master Roaster</span>
+                <p>With over a decade of experience across three continents, Julian treats every roast profile as a scientific art form.</p>
+              </div>
+            </div>
+            <div className="artisan-card">
+              <div className="artisan-visual">
+                 <Image src="/images/pastry.png" alt="Executive Pastry Chef" fill style={{objectFit: 'cover'}} />
+              </div>
+              <div className="artisan-info">
+                <h3>Elara Vance</h3>
+                <span className="artisan-role">Executive Pastry Chef</span>
+                <p>Elara pairs the bold notes of our coffee with delicate, sophisticated pastries that linger elegantly on the palate.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Customer Reviews Carousel */}
       <section className="reviews-section">
         <div className="container">
-          <div className="text-center mb-16">
+          <div className="reviews-header text-center">
             <h2 className="section-title">Words from the <span className="text-gradient">Bold</span></h2>
-            <p className="text-muted max-w-2xl mx-auto mt-4">Discover what our patrons have to say about their experiences at DND Cafe.</p>
+            <p className="reviews-subtitle text-muted">Discover what our patrons have to say about their experiences at DND Cafe.</p>
           </div>
 
-          <div className="carousel-container relative max-w-4xl mx-auto">
-            <Quote className="absolute top-0 left-0 text-[var(--primary)] opacity-20 w-24 h-24 -translate-y-1/2 -translate-x-1/4 sm:-translate-x-1/2" />
+          <div className="carousel-container">
+            <Quote className="quote-icon" />
             
-            <div className="overflow-hidden relative">
+            <div className="carousel-wrapper">
               <div 
-                className="carousel-track flex transition-transform duration-700 ease-in-out"
+                className="carousel-track"
                 style={{ transform: `translateX(-${currentReview * 100}%)` }}
               >
                 {reviews.map((review) => (
-                  <div key={review.id} className="carousel-slide w-full flex-shrink-0 px-4 sm:px-12">
-                    <div className="glass-card review-card flex flex-col items-center text-center p-8 sm:p-12">
-                      <div className="flex gap-1 mb-6">
+                  <div key={review.id} className="carousel-slide">
+                    <div className="glass-card review-card">
+                      <div className="rating-stars">
                         {[...Array(review.rating)].map((_, i) => (
-                          <Star key={i} className="text-gold fill-current w-5 h-5" />
+                          <Star key={i} className="star-icon text-gold" />
                         ))}
                       </div>
-                      <p className="review-text text-lg sm:text-2xl font-serif italic leading-relaxed mb-8">
+                      <p className="review-text">
                         "{review.text}"
                       </p>
                       <div className="review-author">
-                        <h4 className="font-bold text-white text-lg tracking-wide">{review.name}</h4>
-                        <span className="text-sm text-[var(--primary)] uppercase tracking-widest">{review.role}</span>
+                        <h4>{review.name}</h4>
+                        <span>{review.role}</span>
                       </div>
                     </div>
                   </div>
@@ -120,11 +194,11 @@ export default function About() {
             </div>
 
             {/* Navigation Controls */}
-            <div className="carousel-nav flex justify-center gap-4 mt-8">
+            <div className="carousel-nav">
               <button onClick={prevReview} className="nav-btn" aria-label="Previous review">
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft size={24} />
               </button>
-              <div className="flex gap-2 items-center">
+              <div className="carousel-dots">
                 {reviews.map((_, idx) => (
                   <button 
                     key={idx}
@@ -135,146 +209,12 @@ export default function About() {
                 ))}
               </div>
               <button onClick={nextReview} className="nav-btn" aria-label="Next review">
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight size={24} />
               </button>
             </div>
           </div>
         </div>
       </section>
-
-      <style jsx>{`
-        .about-page {
-          padding-top: 0;
-          background-color: var(--background);
-        }
-
-        .about-hero {
-          height: 65vh;
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .about-hero-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to top, var(--background) 0%, rgba(18,18,18,0.5) 50%, rgba(18,18,18,0.8) 100%);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 10;
-        }
-
-        .about-title {
-          font-size: clamp(3.5rem, 8vw, 5.5rem);
-          margin-bottom: 0.5rem;
-          letter-spacing: 2px;
-        }
-
-        .about-subtitle {
-          font-size: 1.25rem;
-          color: rgba(255, 255, 255, 0.7);
-          letter-spacing: 1px;
-          text-transform: uppercase;
-        }
-
-        .journey-section {
-          padding: 8rem 0;
-        }
-
-        .journey-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 6rem;
-          align-items: center;
-        }
-
-        .journey-image-container {
-          position: relative;
-          height: 600px;
-          width: 100%;
-        }
-
-        .image-accent-border {
-          position: absolute;
-          inset: -20px 20px 20px -20px;
-          border: 2px solid rgba(212, 175, 55, 0.3);
-          border-radius: 1rem;
-          z-index: -1;
-        }
-
-        /* Reviews Section Styles */
-        .reviews-section {
-          padding: 8rem 0 10rem;
-          background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .review-card {
-          border: 1px solid rgba(212, 175, 55, 0.15);
-          background: rgba(18, 18, 18, 0.6);
-        }
-
-        .review-text {
-          color: rgba(255, 255, 255, 0.9);
-        }
-
-        .text-gold {
-          color: var(--primary);
-        }
-
-        .nav-btn {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          background: rgba(255, 255, 255, 0.03);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          transition: all 0.3s ease;
-        }
-
-        .nav-btn:hover {
-          background: var(--primary);
-          color: #121212;
-          border-color: var(--primary);
-          transform: scale(1.05);
-        }
-
-        .dot-indicator {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.2);
-          transition: all 0.3s ease;
-          padding: 0;
-          margin: 0 4px;
-        }
-
-        .dot-indicator.active {
-          width: 24px;
-          border-radius: 10px;
-          background: var(--primary);
-        }
-
-        @media (max-width: 1024px) {
-          .journey-grid {
-            grid-template-columns: 1fr;
-            gap: 4rem;
-          }
-          .journey-image-container {
-            height: 400px;
-            order: -1;
-          }
-          .image-accent-border {
-            inset: 10px -10px -10px 10px;
-          }
-        }
-      `}</style>
     </div>
   );
 }

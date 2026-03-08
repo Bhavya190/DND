@@ -1,10 +1,13 @@
 "use client";
+import './home.css';
 import { useState } from 'react';
 import Image from 'next/image';
 import { Coffee, Star, MapPin, Clock, ShoppingBag, ChevronRight, Info } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState('Breads');
+  const { addToCart } = useCart();
 
   const products = [
     { id: 1, name: 'Whole Grain Spelt', price: 'Rs. 450', weight: '950g', category: 'Breads', image: '/images/fav-whole-grain.png', isNew: true },
@@ -19,6 +22,31 @@ export default function Home() {
 
   const categories = ['Breads', 'Pastry', 'Specialty'];
   const filteredProducts = products.filter(p => p.category === activeCategory);
+
+  const handleAddToCart = (product: any) => {
+    // Extract numeric price from strings like "Rs. 250"
+    const numericPrice = parseInt(product.price.replace(/\D/g, ''), 10);
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: numericPrice,
+      quantity: 1,
+      image: product.image
+    });
+    // Create simple toast-like feedback
+    const btn = document.getElementById(`add-btn-${product.id}`);
+    if (btn) {
+      const originalText = btn.innerText;
+      btn.innerText = 'ADDED!';
+      btn.style.backgroundColor = 'var(--primary)';
+      btn.style.color = '#121212';
+      setTimeout(() => {
+        btn.innerText = originalText;
+        btn.style.backgroundColor = '';
+        btn.style.color = '';
+      }, 1000);
+    }
+  };
 
   return (
     <div className="home-container">
@@ -134,7 +162,13 @@ export default function Home() {
                   </div>
                   <div className="fav-footer">
                     <h3 className="fav-name">{product.name}</h3>
-                    <button className="btn-add">ADD</button>
+                    <button 
+                      id={`add-btn-${product.id}`}
+                      className="btn-add"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      ADD
+                    </button>
                   </div>
                 </div>
               </div>
@@ -250,554 +284,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <style jsx>{`
-        .hero {
-          height: 100vh;
-          display: flex;
-          align-items: center;
-          padding: 0 10%;
-          background: url('/images/hero.png') center/cover no-repeat;
-          position: relative;
-        }
-        .hero-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to right, rgba(18, 18, 18, 0.9), transparent);
-          z-index: 1;
-        }
-        .hero-content {
-          position: relative;
-          z-index: 2;
-          max-width: 650px;
-        }
-        .hero-title {
-          font-size: clamp(3rem, 8vw, 4.5rem);
-          margin-bottom: 1.5rem;
-          line-height: 1.1;
-        }
-        .hero-subtitle {
-          font-size: 1.25rem;
-          color: var(--text-muted);
-          margin-bottom: 2.5rem;
-        }
-        .hero-btns {
-          display: flex;
-          gap: 1.5rem;
-        }
-        .btn-secondary {
-          border: 1px solid var(--primary);
-          color: var(--primary);
-          padding: 0.8rem 2rem;
-          border-radius: 50px;
-          font-weight: 600;
-        }
-
-        .bold-section {
-          padding: 8rem 0;
-          background: #fdfaf5;
-          position: relative;
-          overflow: hidden;
-        }
-        .bold-header {
-          text-align: center;
-          margin-bottom: 8rem;
-        }
-        .bold-title {
-          font-size: clamp(2.5rem, 6vw, 3.5rem);
-          margin-bottom: 0.5rem;
-          color: #4a3427;
-        }
-        .bold-subtitle {
-          color: #8c7365;
-          font-style: italic;
-          font-size: 1.1rem;
-        }
-
-        .bold-grid {
-          display: flex;
-          justify-content: center;
-          align-items: flex-start;
-          gap: 3rem;
-          padding: 0 5%;
-          max-width: 1400px;
-          margin: 0 auto;
-        }
-
-        .bold-card-container {
-          position: relative;
-          flex: 1;
-          max-width: 320px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding-top: 50px;
-        }
-
-        .cup-overlay {
-          position: absolute;
-          top: -30px;
-          width: 160px;
-          height: 160px;
-          z-index: 20;
-          border-radius: 50%;
-          overflow: hidden;
-          background: #fdfaf5; /* Clean background for the cutout area */
-          border: 6px solid #fdfaf5;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-          transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .cup-img {
-          position: relative !important;
-        }
-
-        .bold-card-container:hover .cup-overlay {
-          transform: translateY(-8px) scale(1.05);
-        }
-
-        .bold-card {
-          position: relative;
-          width: 100%;
-          aspect-ratio: 1/1.2; /* Smaller cards */
-          background: linear-gradient(180deg, #9e6d4c 0%, #4a3427 100%);
-          border-radius: 35px;
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          padding: 2.5rem 1.5rem;
-          box-shadow: 0 25px 50px rgba(74, 52, 39, 0.25);
-        }
-
-        /* Circular cutout at the top */
-        .bold-card::before {
-          content: '';
-          position: absolute;
-          top: -100px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 200px;
-          height: 200px;
-          background: #fdfaf5;
-          border-radius: 50%;
-          z-index: 5;
-        }
-
-        .card-splash {
-          position: absolute;
-          inset: 0;
-          z-index: 2;
-          mix-blend-mode: screen;
-          opacity: 0.5;
-        }
-
-        .bold-card-content {
-          position: relative;
-          z-index: 10;
-          text-align: center;
-          padding: 0.5rem;
-        }
-
-        .bold-card-content h3 {
-          font-size: 1.5rem;
-          margin-bottom: 0.6rem;
-          color: #fff;
-        }
-
-        .bold-card-content p {
-          font-size: 0.9rem;
-          line-height: 1.5;
-          color: rgba(255, 255, 255, 0.85);
-        }
-
-        @media (max-width: 1024px) {
-          .bold-grid {
-            flex-wrap: wrap;
-            gap: 6rem;
-          }
-          .bold-card-container {
-            flex: none;
-            width: 300px;
-          }
-        }
-
-        .favourites-section {
-          padding: 8rem 0;
-          background-color: #1a1a1a;
-          background-image: 
-            radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 40%),
-            radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.03) 0%, transparent 40%),
-            url("https://www.transparenttextures.com/patterns/black-linen.png");
-          color: #fff;
-        }
-
-        .favourites-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-          margin-bottom: 5rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-          padding-bottom: 2rem;
-        }
-
-        .category-filter {
-          display: flex;
-          gap: 1.5rem;
-        }
-
-        .filter-btn {
-          font-family: var(--font-heading);
-          font-size: 1rem;
-          color: rgba(255, 255, 255, 0.5);
-          text-transform: uppercase;
-          letter-spacing: 2px;
-          padding-bottom: 0.5rem;
-          position: relative;
-          transition: var(--transition);
-        }
-
-        .filter-btn.active {
-          color: var(--primary);
-        }
-
-        .filter-btn.active::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 1px;
-          background: var(--primary);
-        }
-
-        .favourites-title {
-          font-size: 3rem;
-          letter-spacing: 5px;
-          color: var(--primary);
-          text-align: center;
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        .header-info {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          max-width: 300px;
-          font-size: 0.85rem;
-          color: rgba(255, 255, 255, 0.6);
-          line-height: 1.4;
-        }
-
-        .info-icon {
-          width: 30px;
-          height: 30px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-        }
-
-        .favourites-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-          gap: 3rem;
-        }
-
-        .fav-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 20px;
-          overflow: hidden;
-          transition: var(--transition);
-        }
-
-        .fav-card:hover {
-          transform: translateY(-10px);
-          background: rgba(255, 255, 255, 0.04);
-          border-color: rgba(212, 175, 55, 0.2);
-        }
-
-        .fav-card-visual {
-          height: 300px;
-          position: relative;
-          background: rgba(0, 0, 0, 0.2);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 2rem;
-        }
-
-        .fav-image-wrapper {
-          width: 100%;
-          height: 100%;
-          position: relative;
-          transition: transform 0.5s ease;
-        }
-
-        .fav-card:hover .fav-image-wrapper {
-          transform: scale(1.1);
-        }
-
-        .badge {
-          position: absolute;
-          top: 1.5rem;
-          left: 1.5rem;
-          padding: 0.4rem 1rem;
-          border-radius: 50px;
-          font-size: 0.75rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          z-index: 5;
-        }
-
-        .badge.new { background: var(--primary); color: #1a1a1a; }
-        .badge.hot { background: #e74c3c; color: #fff; }
-
-        .fav-details-overlay {
-          position: absolute;
-          top: 1.5rem;
-          right: 1.5rem;
-        }
-
-        .info-trigger {
-          width: 35px;
-          height: 35px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.1);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: var(--transition);
-        }
-
-        .info-trigger:hover {
-          background: var(--primary);
-          color: #1a1a1a;
-        }
-
-        .fav-card-content {
-          padding: 2rem;
-        }
-
-        .fav-meta {
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 1rem;
-        }
-
-        .fav-price {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: var(--primary);
-        }
-
-        .fav-weight {
-          font-size: 0.9rem;
-          color: rgba(255, 255, 255, 0.4);
-        }
-
-        .fav-footer {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-        }
-
-        .fav-name {
-          font-size: 1.5rem;
-          line-height: 1.2;
-          max-width: 180px;
-        }
-
-        .btn-add {
-          background: rgba(212, 175, 55, 0.1);
-          border: 1px solid var(--primary);
-          color: var(--primary);
-          padding: 0.5rem 1.2rem;
-          border-radius: 8px;
-          font-weight: 700;
-          font-size: 0.85rem;
-          transition: var(--transition);
-        }
-
-        .btn-add:hover {
-          background: var(--primary);
-          color: #1a1a1a;
-        }
-
-        @media (max-width: 1024px) {
-          .favourites-header {
-            flex-direction: column;
-            align-items: center;
-            gap: 3rem;
-            text-align: center;
-          }
-          .favourites-title {
-            position: static;
-            transform: none;
-          }
-          .header-info {
-            max-width: none;
-          }
-        }
-
-        .about-section { background: rgba(255, 255, 255, 0.02); }
-        .about-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 5rem;
-          align-items: center;
-        }
-        .about-image-container {
-          height: 500px;
-          position: relative;
-        }
-        .about-text p {
-          margin-bottom: 1.5rem;
-          line-height: 1.8;
-          color: var(--text-muted);
-        }
-        .stats-container {
-          display: flex;
-          gap: 2rem;
-          margin-top: 2rem;
-        }
-        .stat-item {
-          display: flex;
-          align-items: center;
-          gap: 0.8rem;
-          font-weight: 600;
-        }
-        .text-gold { color: var(--primary); }
-
-        .dnd-is-section {
-          padding: 8rem 0;
-          background: radial-gradient(circle at center, rgba(139, 69, 19, 0.1) 0%, transparent 70%);
-          position: relative;
-          overflow: hidden;
-        }
-        .features-container {
-          display: grid;
-          grid-template-columns: 1.5fr 2fr 1.5fr;
-          gap: 2rem;
-          align-items: center;
-          position: relative;
-          z-index: 2;
-        }
-        .features-col {
-          display: flex;
-          flex-direction: column;
-          gap: 6rem;
-        }
-        .feature-item {
-          position: relative;
-          padding: 1.5rem;
-        }
-        .feature-num {
-          position: absolute;
-          top: -2rem;
-          left: 0;
-          font-size: 8rem;
-          font-weight: 900;
-          color: rgba(255, 255, 255, 0.03);
-          line-height: 1;
-          z-index: -1;
-          font-family: var(--font-heading);
-        }
-        .feature-item.right .feature-num {
-          left: auto;
-          right: 0;
-        }
-        .feature-text h3 {
-          font-size: 1.5rem;
-          margin-bottom: 1rem;
-          color: var(--primary);
-        }
-        .feature-text p {
-          font-size: 0.95rem;
-          line-height: 1.6;
-          color: var(--text-muted);
-        }
-        .features-cup {
-          position: relative;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .cup-wrapper {
-          position: relative;
-          z-index: 2;
-          filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
-          transition: transform 0.5s ease;
-        }
-        .cup-wrapper:hover {
-          transform: translateY(-10px) rotate(2deg);
-        }
-        .bean {
-          position: absolute;
-          z-index: 1;
-          filter: blur(1px);
-          opacity: 0.6;
-        }
-        .bean-1 { top: 10%; left: -20%; transform: rotate(45deg); }
-        .bean-2 { bottom: 15%; right: -15%; transform: rotate(-30deg); }
-
-        .contact-card {
-          padding: 4rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-        .info-list {
-          display: flex;
-          flex-direction: column;
-          gap: 1.2rem;
-        }
-        .info-item {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          color: var(--text-muted);
-        }
-
-        @media (max-width: 968px) {
-          .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-          .about-image-container { height: 350px; }
-          
-          .features-container {
-            grid-template-columns: 1fr;
-            gap: 4rem;
-          }
-          .features-col {
-            gap: 4rem;
-          }
-          .features-cup {
-            order: -1;
-            margin-bottom: 2rem;
-          }
-          .feature-item {
-            text-align: center;
-          }
-          .feature-item.right .feature-num {
-            right: auto;
-            left: 50%;
-            transform: translateX(-50%);
-          }
-          .feature-num {
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 6rem;
-          }
-
-          .contact-card { flex-direction: column; text-align: center; gap: 3rem; padding: 3rem 2rem; }
-          .info-item { justify-content: center; }
-        }
-      `}</style>
     </div>
   );
 }

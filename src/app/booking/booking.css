@@ -1,0 +1,361 @@
+.booking-page {
+  background-color: var(--background);
+  min-height: 100vh;
+  padding: 120px 5%;
+}
+
+.booking-hero {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.booking-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.booking-subtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.booking-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .booking-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Table Map Section */
+.table-map-section {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: white;
+}
+
+.floor-plan {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 2.5rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 2rem;
+  position: relative;
+  flex-grow: 1;
+  min-height: 400px;
+}
+
+/* Floor planters/decor representation */
+.floor-plan::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(39, 174, 96, 0.2);
+  border: 1px solid rgba(39, 174, 96, 0.4);
+}
+
+.floor-plan::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(39, 174, 96, 0.2);
+  border: 1px solid rgba(39, 174, 96, 0.4);
+}
+
+.table {
+  width: 90px;
+  height: 90px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.table.square {
+  border-radius: 10px;
+}
+
+.table.booth {
+  width: 130px;
+  border-radius: 15px;
+}
+
+.table::before, .table::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.table.booth::before, .table.booth::after {
+  width: 80px;
+}
+
+.table::before {
+  top: -12px;
+}
+
+.table::after {
+  bottom: -12px;
+}
+
+.table:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.5);
+  transform: scale(1.05);
+}
+
+.table.selected {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #121212;
+  font-weight: bold;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+.table.selected::before, .table.selected::after {
+  background: rgba(18, 18, 18, 0.5);
+}
+
+.table-num {
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+}
+
+.table-seats {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.table.selected .table-seats {
+  color: rgba(18, 18, 18, 0.8);
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.legend-color {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.legend-available {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.legend-selected {
+  background: var(--primary);
+}
+
+/* Booking Form Section */
+.booking-form-section {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 20px;
+  padding: 3rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+input, select, textarea {
+  width: 100%;
+  background: rgba(18, 18, 18, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Customizing date and time inputs for webkit */
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.selected-table-display {
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--primary);
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.selected-table-display span {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.btn-submit {
+  width: 100%;
+  background: var(--primary);
+  color: #121212;
+  padding: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: #b5952f;
+  transform: translateY(-2px);
+}
+
+.btn-submit:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.3);
+  cursor: not-allowed;
+}
+
+.success-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(39, 174, 96, 0.3);
+  border-radius: 20px;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(39, 174, 96, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2ecc71;
+}
+
+.success-message h2 {
+  color: #2ecc71;
+  font-size: 2rem;
+}
+
+.success-message p {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.btn-home {
+  display: inline-block;
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: all 0.3s;
+}
+
+.btn-home:hover {
+  background: var(--primary);
+  color: #121212;
+}
+
+@media (max-width: 600px) {
+  .floor-plan {
+    gap: 1.5rem;
+  }
+  .table.booth {
+    width: 100px;
+  }
+}

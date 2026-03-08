@@ -1,0 +1,350 @@
+.about-page {
+          padding-top: 0;
+          background-color: var(--background);
+        }
+
+        .about-hero {
+          height: 65vh;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .about-hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, var(--background) 0%, rgba(18,18,18,0.5) 50%, rgba(18,18,18,0.8) 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10;
+        }
+
+        .about-title {
+          font-size: clamp(3.5rem, 8vw, 5.5rem);
+          margin-bottom: 0.5rem;
+          letter-spacing: 2px;
+        }
+
+        .about-subtitle {
+          font-size: 1.25rem;
+          color: rgba(255, 255, 255, 0.7);
+          letter-spacing: 1px;
+          text-transform: uppercase;
+        }
+
+        .journey-section {
+          padding: 8rem 0;
+        }
+
+        .journey-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 6rem;
+          align-items: center;
+        }
+
+        .journey-image-container {
+          position: relative;
+          height: 600px;
+          width: 100%;
+        }
+
+        .image-accent-border {
+          position: absolute;
+          inset: -20px 20px 20px -20px;
+          border: 2px solid rgba(212, 175, 55, 0.3);
+          border-radius: 1rem;
+          z-index: -1;
+        }
+
+        /* Philosophy Section */
+        .philosophy-section {
+          padding: 8rem 0;
+          background: rgba(255, 255, 255, 0.02);
+        }
+
+        .philosophy-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 3rem;
+        }
+
+        .philosophy-card {
+          background: rgba(18, 18, 18, 0.5);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          padding: 3rem 2rem;
+          border-radius: 1rem;
+          text-align: center;
+          transition: transform 0.3s ease;
+        }
+
+        .philosophy-card:hover {
+          transform: translateY(-10px);
+          border-color: rgba(212, 175, 55, 0.2);
+        }
+
+        .icon-wrapper {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          background: rgba(212, 175, 55, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 2rem;
+        }
+
+        .philosophy-card h3 {
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+          color: white;
+        }
+
+        .philosophy-card p {
+          color: rgba(255, 255, 255, 0.7);
+          line-height: 1.6;
+        }
+
+        /* Artisans Section */
+        .artisans-section {
+          padding: 8rem 0;
+        }
+
+        .artisans-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 4rem;
+          max-width: 1000px;
+          margin: 0 auto;
+        }
+
+        .artisan-card {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .artisan-visual {
+          height: 400px;
+          position: relative;
+          border-radius: 1rem;
+          overflow: hidden;
+        }
+
+        .artisan-info {
+          text-align: center;
+        }
+
+        .artisan-info h3 {
+          font-size: 1.8rem;
+          color: white;
+          margin-bottom: 0.5rem;
+        }
+
+        .artisan-role {
+          display: block;
+          color: var(--primary);
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          font-size: 0.85rem;
+          margin-bottom: 1rem;
+        }
+
+        .artisan-info p {
+          color: rgba(255, 255, 255, 0.7);
+          line-height: 1.6;
+        }
+
+        /* Reviews Section Styles */
+        .reviews-section {
+          padding: 8rem 0 10rem;
+          background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .reviews-header {
+          margin-bottom: 4rem;
+        }
+
+        .reviews-subtitle {
+          max-width: 600px;
+          margin: 1rem auto 0;
+        }
+
+        .carousel-container {
+          position: relative;
+          max-width: 900px;
+          margin: 0 auto;
+        }
+
+        .quote-icon {
+          position: absolute;
+          top: -20px;
+          left: -20px;
+          color: var(--primary);
+          opacity: 0.15;
+          width: 80px;
+          height: 80px;
+          z-index: 0;
+        }
+
+        .carousel-wrapper {
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+          z-index: 1;
+        }
+
+        .carousel-track {
+          display: flex;
+          transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+          will-change: transform;
+        }
+
+        .carousel-slide {
+          flex: 0 0 100%;
+          width: 100%;
+          padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+          .carousel-slide {
+            padding: 0 3rem;
+          }
+        }
+
+        .review-card {
+          border: 1px solid rgba(212, 175, 55, 0.15);
+          background: rgba(18, 18, 18, 0.4);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          padding: 3rem;
+          border-radius: 20px;
+          backdrop-filter: blur(10px);
+        }
+
+        .rating-stars {
+          display: flex;
+          gap: 0.5rem;
+          margin-bottom: 2rem;
+        }
+
+        .star-icon {
+          fill: var(--primary);
+          width: 20px;
+          height: 20px;
+        }
+
+        .review-text {
+          color: rgba(255, 255, 255, 0.95);
+          font-size: 1.5rem;
+          font-family: var(--font-heading);
+          font-style: italic;
+          line-height: 1.6;
+          margin-bottom: 2.5rem;
+        }
+
+        .review-author h4 {
+          font-weight: 700;
+          color: white;
+          font-size: 1.25rem;
+          letter-spacing: 1px;
+          margin-bottom: 0.25rem;
+        }
+
+        .review-author span {
+          color: var(--primary);
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          font-size: 0.85rem;
+        }
+
+        .carousel-nav {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 2rem;
+          margin-top: 3rem;
+        }
+
+        .carousel-dots {
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+        }
+
+        .nav-btn {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          background: rgba(255, 255, 255, 0.03);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+
+        .nav-btn:hover {
+          background: var(--primary);
+          color: #121212;
+          border-color: var(--primary);
+          transform: scale(1.05);
+        }
+
+        .dot-indicator {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.2);
+          transition: all 0.3s ease;
+          padding: 0;
+          margin: 0;
+          cursor: pointer;
+          border: none;
+        }
+
+        .dot-indicator.active {
+          width: 30px;
+          border-radius: 10px;
+          background: var(--primary);
+        }
+
+        @media (max-width: 1024px) {
+          .journey-grid {
+            grid-template-columns: 1fr;
+            gap: 4rem;
+          }
+          .journey-image-container {
+            height: 400px;
+            order: -1;
+          }
+          .image-accent-border {
+            inset: 10px -10px -10px 10px;
+          }
+          .philosophy-grid {
+            grid-template-columns: 1fr;
+          }
+          .artisans-grid {
+            grid-template-columns: 1fr;
+          }
+          .review-card {
+            padding: 2rem 1.5rem;
+          }
+          .review-text {
+            font-size: 1.25rem;
+          }
+          .quote-icon {
+            left: 10px;
+            top: -25px;
+            width: 50px;
+            height: 50px;
+          }
+        }

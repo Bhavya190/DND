@@ -1,8 +1,11 @@
 "use client";
 import Link from 'next/link';
-import { Coffee } from 'lucide-react';
+import { Coffee, ShoppingCart } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
 
 export default function Navbar() {
+  const { cartCount } = useCart();
+
   return (
     <nav className="navbar">
       <Link href="/" className="logo">
@@ -17,7 +20,15 @@ export default function Navbar() {
         <Link href="/contact" className="nav-item">Contact</Link>
       </div>
 
-      <button className="btn-primary">Book a Table</button>
+      <div className="nav-actions">
+        <Link href="/cart" className="cart-btn" aria-label="View Cart">
+          <ShoppingCart size={22} />
+          {cartCount > 0 && (
+             <span className="cart-badge">{cartCount}</span>
+          )}
+        </Link>
+        <Link href="/booking" className="btn-primary">Book a Table</Link>
+      </div>
 
       <style jsx>{`
         .navbar {
@@ -54,6 +65,37 @@ export default function Navbar() {
         }
         .nav-item:hover {
           color: var(--primary);
+        }
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+        }
+        .cart-btn {
+          position: relative;
+          color: white;
+          transition: color 0.3s ease;
+          display: flex;
+          align-items: center;
+        }
+        .cart-btn:hover {
+          color: var(--primary);
+        }
+        .cart-badge {
+          position: absolute;
+          top: -8px;
+          right: -8px;
+          background: #e74c3c;
+          color: white;
+          font-size: 0.7rem;
+          font-weight: bold;
+          height: 18px;
+          min-width: 18px;
+          padding: 0 5px;
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         @media (max-width: 968px) {
           .nav-links {
