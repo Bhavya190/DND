@@ -64,8 +64,77 @@
   align-items: center;
   justify-content: center;
 }
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+.mobile-menu-btn:hover {
+  color: var(--primary);
+}
+.mobile-menu {
+  position: fixed;
+  top: 76px; /* Below navbar */
+  left: 0;
+  right: 0;
+  background: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  z-index: 999;
+  animation: slideDown 0.3s ease forwards;
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+.mobile-nav-item {
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  color: white;
+  transition: color 0.3s ease;
+}
+.mobile-nav-item:hover {
+  color: var(--primary);
+}
+.mobile-book-btn {
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 250px;
+  text-align: center;
+}
+.desktop-only {
+  display: block;
+}
+
 @media (max-width: 968px) {
   .nav-links {
     display: none;
+  }
+  .desktop-only {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
