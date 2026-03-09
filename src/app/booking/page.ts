@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Calendar, Clock, Users, Check } from 'lucide-react';
 import Link from 'next/link';
 import './booking.css';
@@ -12,6 +12,16 @@ export default function BookingPage() {
     date: '', time: '', guests: '', name: '', email: '', phone: '', requests: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [bookedTables, setBookedTables] = useState<{tableId: number, date: string, time: string}[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('dndBookings');
+    if (saved) {
+      try {
+        setBookedTables(JSON.parse(saved));
+      } catch (e) {}
+    }
+  }, []);
 
   const tables = [
     { id: 1, seats: 2, type: 'round' },
@@ -32,7 +42,25 @@ export default function BookingPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedTable) return;
+
+    if (isTableReserved(selectedTable)) {
+      alert("This table is already reserved for the selected date and time.");
+      return;
+    }
+
+    const newBookings = [...bookedTables, { tableId: selectedTable, date: formData.date, time: formData.time }];
+    setBookedTables(newBookings);
+    localStorage.setItem('dndBookings', JSON.stringify(newBookings));
     setTimeout(() => { setIsSubmitted(true); }, 1000);
+  };
+
+  const isTableReserved = (tableId: number) => {
+    if (!formData.date || !formData.time) return false;
+    return bookedTables.some(booking => 
+      booking.tableId === tableId && 
+      booking.date === formData.date && 
+      booking.time === formData.time
+    );
   };
 
   return React.createElement("div", { className: "booking-page" },
@@ -44,17 +72,28 @@ export default function BookingPage() {
       React.createElement("div", { className: "table-map-section" },
         React.createElement("h2", { className: "section-title font-heading" }, "Select Your Table"),
         React.createElement("div", { className: "floor-plan" },
-          tables.map((table) => 
-            React.createElement("div", { key: table.id, className: `table ${table.type} ${selectedTable === table.id ? 'selected' : ''}`, onClick: () => setSelectedTable(table.id) },
+          tables.map((table) => {
+            const reserved = isTableReserved(table.id);
+            return React.createElement("div", { 
+              key: table.id, 
+              className: `table ${table.type} ${selectedTable === table.id ? 'selected' : ''} ${reserved ? 'reserved' : 'available'}`, 
+              onClick: () => {
+                if (reserved) {
+                  alert("This table is already reserved for the selected date and time.");
+                  return;
+                }
+                setSelectedTable(table.id);
+              } 
+            },
               React.createElement("div", { className: "table-num" }, table.id),
               React.createElement("div", { className: "table-seats" }, `${table.seats} Seats`)
             )
-          )
+          })
         ),
         React.createElement("div", { className: "legend" },
           React.createElement("div", { className: "legend-item" }, React.createElement("div", { className: "legend-color legend-available" }), React.createElement("span", null, "Available")),
           React.createElement("div", { className: "legend-item" }, React.createElement("div", { className: "legend-color legend-selected" }), React.createElement("span", null, "Selected")),
-          React.createElement("div", { className: "legend-item" }, React.createElement("div", { className: "legend-color", style: { background: 'rgba(255,255,255,0.1)' } }), React.createElement("span", null, "Reserved"))
+          React.createElement("div", { className: "legend-item" }, React.createElement("div", { className: "legend-color reserved" }), React.createElement("span", null, "Reserved"))
         )
       ),
       React.createElement("div", null,
@@ -63,7 +102,14 @@ export default function BookingPage() {
           React.createElement("h2", { className: "font-heading" }, "Reservation Confirmed!"),
           React.createElement("p", null, `Thank you, ${formData.name}. Your table (Table #${selectedTable}) has been successfully reserved for ${formData.date} at ${formData.time} for ${formData.guests} guests.`),
           React.createElement("p", null, `We've sent a confirmation email to ${formData.email}.`),
-          React.createElement(Link, { href: "/", className: "btn-home" }, "RETURN TO HOME")
+          React.createElement("button", { 
+            className: "btn-home", 
+            onClick: () => {
+              setIsSubmitted(false);
+              setSelectedTable(null);
+              setFormData({ date: '', time: '', guests: '', name: '', email: '', phone: '', requests: '' });
+            } 
+          }, "MAKE ANOTHER RESERVATION")
         ) : React.createElement("form", { className: "booking-form-section", onSubmit: handleSubmit },
           React.createElement("h2", { className: "section-title font-heading text-gold" }, "Reservation Details"),
           !selectedTable ? React.createElement("div", { className: "selected-table-display", style: { borderColor: 'rgba(255,255,255,0.1)', background: 'transparent' } }, React.createElement("span", { style: { color: 'rgba(255,255,255,0.5)' } }, "Please select a table from the map"))
@@ -77,7 +123,11 @@ export default function BookingPage() {
             React.createElement("div", { className: "form-group" }, React.createElement("label", { htmlFor: "phone" }, "Phone Number"), React.createElement("input", { type: "tel", id: "phone", name: "phone", placeholder: "+1 (555) 000-0000", required: true, onChange: handleInputChange, value: formData.phone })),
             React.createElement("div", { className: "form-group full-width" }, React.createElement("label", { htmlFor: "requests" }, "Special Requests (Optional)"), React.createElement("textarea", { id: "requests", name: "requests", rows: 3, placeholder: "Dietary requirements, celebrations, etc.", onChange: handleInputChange, value: formData.requests }))
           ),
-          React.createElement("button", { type: "submit", className: "btn-submit", disabled: !selectedTable || !formData.date || !formData.time || !formData.guests || !formData.name || !formData.email }, "CONFIRM RESERVATION")
+          React.createElement("button", { 
+            type: "submit", 
+            className: "btn-submit", 
+            disabled: !selectedTable || !formData.date || !formData.time || !formData.guests || !formData.name || !formData.email || (selectedTable !== null && isTableReserved(selectedTable))
+          }, (selectedTable !== null && isTableReserved(selectedTable)) ? "TABLE UNAVAILABLE" : "CONFIRM RESERVATION")
         )
       )
     )

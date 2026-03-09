@@ -49,19 +49,19 @@ export default function Footer() {
             "li",
             { className: "flex justify-between" },
             React.createElement("span", null, "Mon - Fri"),
-            React.createElement("span", { className: "text-gold" }, "7am - 9pm")
+            React.createElement("span", { className: "text-gold" }, "10am - 9pm")
           ),
           React.createElement(
             "li",
             { className: "flex justify-between" },
             React.createElement("span", null, "Saturday"),
-            React.createElement("span", { className: "text-gold" }, "8am - 10pm")
+            React.createElement("span", { className: "text-gold" }, "10am - 11pm")
           ),
           React.createElement(
             "li",
             { className: "flex justify-between" },
             React.createElement("span", null, "Sunday"),
-            React.createElement("span", { className: "text-gold" }, "9am - 8pm")
+            React.createElement("span", { className: "text-gold" }, "10am - 11pm")
           )
         )
       ),

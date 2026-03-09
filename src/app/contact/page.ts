@@ -1,13 +1,24 @@
 "use client";
+import { useState } from 'react';
 import './contact.css';
 import Image from 'next/image';
-import { MapPin, Phone, Mail, Clock, Send, Instagram, Facebook, Twitter } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, Instagram, Facebook, Twitter, Check } from 'lucide-react';
 import React from 'react';
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '', email: '', subject: 'General Inquiry', message: ''
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev: any) => ({ ...prev, [id]: value }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you for your message! Our team will get back to you soon.");
+    setIsSubmitted(true);
   };
 
   return React.createElement("div", { className: "contact-page" },
@@ -30,14 +41,14 @@ export default function Contact() {
               React.createElement("div", { className: "icon-box" }, React.createElement(MapPin, { size: 24 })),
               React.createElement("div", null,
                 React.createElement("h4", null, "Location"),
-                React.createElement("p", null, "123 Coffee Avenue, Artisan District, CA 90210")
+                React.createElement("p", null, "1 Elite Avenue, Vasana, Ahmedabad")
               )
             ),
             React.createElement("div", { className: "info-item" },
               React.createElement("div", { className: "icon-box" }, React.createElement(Phone, { size: 24 })),
               React.createElement("div", null,
                 React.createElement("h4", null, "Phone"),
-                React.createElement("p", null, "+1 (555) 123-4567")
+                React.createElement("p", null, "+91 93740 20202")
               )
             ),
             React.createElement("div", { className: "info-item" },
@@ -51,8 +62,8 @@ export default function Contact() {
               React.createElement("div", { className: "icon-box" }, React.createElement(Clock, { size: 24 })),
               React.createElement("div", null,
                 React.createElement("h4", null, "Hours"),
-                React.createElement("p", null, "Mon - Fri: 7:00 AM - 9:00 PM"),
-                React.createElement("p", null, "Sat - Sun: 8:00 AM - 10:00 PM")
+                React.createElement("p", null, "Mon - Fri: 10:00 AM - 9:00 PM"),
+                React.createElement("p", null, "Sat - Sun: 10:00 AM - 11:00 PM")
               )
             )
           ),
@@ -67,32 +78,45 @@ export default function Contact() {
         ),
         React.createElement("div", { className: "contact-form-container" },
           React.createElement("div", { className: "glass-card form-card" },
-            React.createElement("h3", null, "Send a Message"),
-            React.createElement("form", { className: "contact-form", onSubmit: handleSubmit },
-              React.createElement("div", { className: "form-group" },
-                React.createElement("label", { htmlFor: "name" }, "Full Name"),
-                React.createElement("input", { type: "text", id: "name", placeholder: "John Doe", required: true })
-              ),
-              React.createElement("div", { className: "form-group" },
-                React.createElement("label", { htmlFor: "email" }, "Email Address"),
-                React.createElement("input", { type: "email", id: "email", placeholder: "john@example.com", required: true })
-              ),
-              React.createElement("div", { className: "form-group" },
-                React.createElement("label", { htmlFor: "subject" }, "Subject"),
-                React.createElement("select", { id: "subject" },
-                  React.createElement("option", null, "General Inquiry"),
-                  React.createElement("option", null, "Table Reservation"),
-                  React.createElement("option", null, "Private Event"),
-                  React.createElement("option", null, "Feedback")
+            isSubmitted ? React.createElement("div", { className: "success-message", style: { textAlign: 'center', padding: '2rem 1rem' } },
+              React.createElement("div", { className: "success-icon", style: { margin: '0 auto 1.5rem', width: '60px', height: '60px', background: 'rgba(39, 174, 96, 0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2ecc71' } }, React.createElement(Check, { size: 30 })),
+              React.createElement("h3", { style: { color: '#2ecc71', marginBottom: '1rem' } }, "Message Sent!"),
+              React.createElement("p", { className: "text-muted", style: { marginBottom: '2rem' } }, `Thank you, ${formData.name}. Our team will get back to you soon.`),
+              React.createElement("button", { 
+                className: "btn-primary w-full", 
+                onClick: () => {
+                  setIsSubmitted(false);
+                  setFormData({ name: '', email: '', subject: 'General Inquiry', message: '' });
+                } 
+              }, "SEND ANOTHER MESSAGE")
+            ) : React.createElement(React.Fragment, null,
+              React.createElement("h3", null, "Send a Message"),
+              React.createElement("form", { className: "contact-form", onSubmit: handleSubmit },
+                React.createElement("div", { className: "form-group" },
+                  React.createElement("label", { htmlFor: "name" }, "Full Name"),
+                  React.createElement("input", { type: "text", id: "name", placeholder: "John Doe", required: true, value: formData.name, onChange: handleInputChange })
+                ),
+                React.createElement("div", { className: "form-group" },
+                  React.createElement("label", { htmlFor: "email" }, "Email Address"),
+                  React.createElement("input", { type: "email", id: "email", placeholder: "john@example.com", required: true, value: formData.email, onChange: handleInputChange })
+                ),
+                React.createElement("div", { className: "form-group" },
+                  React.createElement("label", { htmlFor: "subject" }, "Subject"),
+                  React.createElement("select", { id: "subject", value: formData.subject, onChange: handleInputChange },
+                    React.createElement("option", null, "General Inquiry"),
+                    React.createElement("option", null, "Table Reservation"),
+                    React.createElement("option", null, "Private Event"),
+                    React.createElement("option", null, "Feedback")
+                  )
+                ),
+                React.createElement("div", { className: "form-group" },
+                  React.createElement("label", { htmlFor: "message" }, "Message"),
+                  React.createElement("textarea", { id: "message", rows: 5, placeholder: "How can we help you today?", required: true, value: formData.message, onChange: handleInputChange })
+                ),
+                React.createElement("button", { type: "submit", className: "btn-primary w-full flex items-center justify-center gap-2" },
+                  "Send Message ",
+                  React.createElement(Send, { size: 18 })
                 )
-              ),
-              React.createElement("div", { className: "form-group" },
-                React.createElement("label", { htmlFor: "message" }, "Message"),
-                React.createElement("textarea", { id: "message", rows: 5, placeholder: "How can we help you today?", required: true })
-              ),
-              React.createElement("button", { type: "submit", className: "btn-primary w-full flex items-center justify-center gap-2" },
-                "Send Message ",
-                React.createElement(Send, { size: 18 })
               )
             )
           )

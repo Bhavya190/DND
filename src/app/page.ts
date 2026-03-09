@@ -20,6 +20,7 @@ export default function Home() {
     { id: 6, name: 'Strawberry Delight', price: 'Rs. 280', weight: '150g', category: 'Pastry', image: '/images/fav-strawberry.png' },
     { id: 7, name: 'Raspberry Dream', price: 'Rs. 310', weight: '150g', category: 'Pastry', image: '/images/fav-raspberry.png' },
     { id: 8, name: 'Classic Sourdough', price: 'Rs. 480', weight: '900g', category: 'Breads', image: '/images/fav-whole-grain.png' },
+    { id: 9, name: 'Rustic Olive Bread', price: 'Rs. 350', weight: '600g', category: 'Breads', image: '/images/fav-multigrain.png' },
   ];
 
   const categories = ['Breads', 'Pastry', 'Specialty'];
@@ -241,11 +242,11 @@ export default function Home() {
             React.createElement("div", { className: "info-list" },
               React.createElement("div", { className: "info-item" },
                 React.createElement(MapPin, { size: 20, className: "text-gold" }),
-                React.createElement("span", null, "123 Elite Avenue, Luxury District, NY")
+                React.createElement("span", null, "1 Elite Avenue, Vasana, Ahmedabad")
               ),
               React.createElement("div", { className: "info-item" },
                 React.createElement(Clock, { size: 20, className: "text-gold" }),
-                React.createElement("span", null, "Open Daily: 7am - 10pm")
+                React.createElement("span", null, "Open Daily: 10am - 9pm")
               )
             )
           ),
