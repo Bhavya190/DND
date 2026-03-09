@@ -2,6 +2,7 @@
 import './home.css';
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Coffee, Star, MapPin, Clock, ShoppingBag, ChevronRight, Info } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import React from 'react';
@@ -56,8 +57,8 @@ export default function Home() {
         ),
         React.createElement("p", { className: "hero-subtitle" }, "Premium artisanal coffee and exquisite pastries crafted for the connoisseur."),
         React.createElement("div", { className: "hero-btns" },
-          React.createElement("button", { className: "btn-primary" }, "View Menu"),
-          React.createElement("button", { className: "btn-secondary" }, "Our Story")
+          React.createElement(Link, { href: "/menu", className: "btn-primary" }, "View Menu"),
+          React.createElement(Link, { href: "/about", className: "btn-secondary" }, "Our Story")
         )
       ),
       React.createElement("div", { className: "hero-overlay" })
@@ -227,7 +228,7 @@ export default function Home() {
           )
         ),
         React.createElement("div", { className: "text-center mt-12" },
-          React.createElement("button", { className: "btn-primary", style: { padding: '1rem 3rem' } }, "Order Now")
+          React.createElement(Link, { href: "/menu", className: "btn-primary", style: { padding: '1rem 3rem' } }, "Order Now")
         )
       )
     ),
@@ -249,7 +250,7 @@ export default function Home() {
             )
           ),
           React.createElement("div", { className: "contact-action" },
-            React.createElement("button", { className: "btn-primary" }, "Get Directions")
+            React.createElement("a", { href: "https://maps.google.com", target: "_blank", rel: "noopener noreferrer", className: "btn-primary" }, "Get Directions")
           )
         )
       )

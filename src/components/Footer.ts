@@ -34,8 +34,8 @@ export default function Footer() {
           { className: "space-y-4" },
           React.createElement("li", null, React.createElement("a", { href: "/", className: "hover-gold" }, "Home")),
           React.createElement("li", null, React.createElement("a", { href: "/menu", className: "hover-gold" }, "Menu")),
-          React.createElement("li", null, React.createElement("a", { href: "#about", className: "hover-gold" }, "About Us")),
-          React.createElement("li", null, React.createElement("a", { href: "#contact", className: "hover-gold" }, "Contact"))
+          React.createElement("li", null, React.createElement("a", { href: "/about", className: "hover-gold" }, "About Us")),
+          React.createElement("li", null, React.createElement("a", { href: "/contact", className: "hover-gold" }, "Contact"))
         )
       ),
       React.createElement(
