@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Providers from "@/components/Providers";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "DND CAFE | Premium Specialty Coffee",
@@ -14,15 +15,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body>
-        <Providers>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </Providers>
-      </body>
-    </html>
+  return React.createElement("html", { lang: "en" },
+    React.createElement("body", null,
+      React.createElement(Providers, null,
+        React.createElement(Navbar, null),
+        React.createElement("main", null, children),
+        React.createElement(Footer, null)
+      )
+    )
   );
 }

@@ -85,19 +85,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
   // Prevent hydration mismatch by returning null until mounted
   if (!isMounted) return null;
 
-  return (
-    <CartContext.Provider value={{
-      cartItems,
-      addToCart,
-      removeFromCart,
-      updateQuantity,
-      clearCart,
-      cartTotal,
-      cartCount
-    }}>
-      {children}
-    </CartContext.Provider>
-  );
+  return React.createElement(CartContext.Provider, { value: {
+    cartItems,
+    addToCart,
+    removeFromCart,
+    updateQuantity,
+    clearCart,
+    cartTotal,
+    cartCount
+  }}, children);
 }
 
 export function useCart() {
