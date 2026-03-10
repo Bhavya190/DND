@@ -27,10 +27,10 @@ export default function BookingPage() {
     { id: 1, seats: 2, type: 'round' },
     { id: 2, seats: 2, type: 'round' },
     { id: 3, seats: 4, type: 'square' },
-    { id: 4, seats: 4, type: 'booth' },
+    { id: 4, seats: 6, type: 'booth' },
     { id: 5, seats: 2, type: 'round' },
     { id: 6, seats: 2, type: 'round' },
-    { id: 7, seats: 6, type: 'square' },
+    { id: 7, seats: 4, type: 'square' },
     { id: 8, seats: 6, type: 'booth' },
   ];
 
