@@ -104,8 +104,8 @@ export default function Menu() {
     ),
     React.createElement("section", { id: "menu-content", className: "menu-content pb-24 pt-12" },
       React.createElement("div", { className: "container max-w-4xl mx-auto" },
-        React.createElement("div", { className: "text-center mb-12" },
-          React.createElement(Coffee, { className: "text-gold mx-auto mb-4 w-8 h-8 opacity-50" }),
+        React.createElement("div", { className: "text-center mb-12 ", style: { marginBottom: '20px' } },
+          React.createElement(Coffee, { className: "text-gold mx-auto mb-2 w-8 h-8 opacity-50" }),
           React.createElement("h2", { className: "text-3xl font-heading tracking-widest text-white uppercase" }, activeCategory)
         ),
         React.createElement("div", { className: "menu-list space-y-12" },

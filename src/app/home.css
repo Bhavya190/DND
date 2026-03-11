@@ -304,29 +304,7 @@
         .badge.new { background: var(--primary); color: #1a1a1a; }
         .badge.hot { background: #e74c3c; color: #fff; }
 
-        .fav-details-overlay {
-          position: absolute;
-          top: 1.5rem;
-          right: 1.5rem;
-        }
-
-        .info-trigger {
-          width: 35px;
-          height: 35px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.1);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: var(--transition);
-        }
-
-        .info-trigger:hover {
-          background: var(--primary);
-          color: #1a1a1a;
-        }
-
+        
         .fav-card-content {
           padding: 2rem;
         }

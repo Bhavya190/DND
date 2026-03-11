@@ -143,10 +143,7 @@ export default function Home() {
                 React.createElement("div", { className: "fav-image-wrapper" },
                   React.createElement(Image, { src: product.image, alt: product.name, fill: true, style: { objectFit: 'contain' } })
                 ),
-                React.createElement("div", { className: "fav-details-overlay" },
-                  React.createElement("div", { className: "info-trigger" }, React.createElement(Info, { size: 18 }))
-                )
-              ),
+                              ),
               React.createElement("div", { className: "fav-card-content" },
                 React.createElement("div", { className: "fav-meta" },
                   React.createElement("span", { className: "fav-price" }, product.price),
