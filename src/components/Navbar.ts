@@ -15,33 +15,37 @@ export default function Navbar() {
       "nav",
       { className: "navbar" },
       React.createElement(
-        Link,
-        { href: "/", className: "logo" },
-        React.createElement(Coffee, { className: "w-8 h-8 text-[#D4AF37]" }),
-        React.createElement("span", null, "DND CAFE")
-      ),
-      React.createElement(
         "div",
-        { className: "nav-links" },
-        React.createElement(Link, { href: "/", className: "nav-item" }, "Home"),
-        React.createElement(Link, { href: "/menu", className: "nav-item" }, "Menu"),
-        React.createElement(Link, { href: "/about", className: "nav-item" }, "About"),
-        React.createElement(Link, { href: "/contact", className: "nav-item" }, "Contact")
-      ),
-      React.createElement(
-        "div",
-        { className: "nav-actions" },
+        { className: "navbar-inner" },
         React.createElement(
           Link,
-          { href: "/cart", className: "cart-btn", "aria-label": "View Cart" },
-          React.createElement(ShoppingCart, { size: 22 }),
-          cartCount > 0 && React.createElement("span", { className: "cart-badge" }, cartCount)
+          { href: "/", className: "logo" },
+          React.createElement(Coffee, { className: "w-8 h-8 text-[#D4AF37]" }),
+          React.createElement("span", null, "DND CAFE")
         ),
-        React.createElement(Link, { href: "/booking", className: "btn-primary desktop-only" }, "Book a Table"),
         React.createElement(
-          "button",
-          { className: "mobile-menu-btn", onClick: () => setIsMobileMenuOpen(!isMobileMenuOpen) },
-          isMobileMenuOpen ? React.createElement(X, { size: 28 }) : React.createElement(Menu, { size: 28 })
+          "div",
+          { className: "nav-links" },
+          React.createElement(Link, { href: "/", className: "nav-item" }, "Home"),
+          React.createElement(Link, { href: "/menu", className: "nav-item" }, "Menu"),
+          React.createElement(Link, { href: "/about", className: "nav-item" }, "About"),
+          React.createElement(Link, { href: "/contact", className: "nav-item" }, "Contact")
+        ),
+        React.createElement(
+          "div",
+          { className: "nav-actions" },
+          React.createElement(
+            Link,
+            { href: "/cart", className: "cart-btn", "aria-label": "View Cart" },
+            React.createElement(ShoppingCart, { size: 22 }),
+            cartCount > 0 && React.createElement("span", { className: "cart-badge" }, cartCount)
+          ),
+          React.createElement(Link, { href: "/booking", className: "btn-primary desktop-only" }, "Book a Table"),
+          React.createElement(
+            "button",
+            { className: "mobile-menu-btn", onClick: () => setIsMobileMenuOpen(!isMobileMenuOpen) },
+            isMobileMenuOpen ? React.createElement(X, { size: 28 }) : React.createElement(Menu, { size: 28 })
+          )
         )
       )
     ),

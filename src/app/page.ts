@@ -51,15 +51,17 @@ export default function Home() {
 
   return React.createElement("div", { className: "home-container" },
     React.createElement("section", { className: "hero" },
-      React.createElement("div", { className: "hero-content animate-fade-in" },
-        React.createElement("h1", { className: "hero-title" },
-          "Discover the Art of ",
-          React.createElement("span", { className: "text-gradient" }, "Relaxation")
-        ),
-        React.createElement("p", { className: "hero-subtitle" }, "Premium artisanal coffee and exquisite pastries crafted for the connoisseur."),
-        React.createElement("div", { className: "hero-btns" },
-          React.createElement(Link, { href: "/menu", className: "btn-primary" }, "View Menu"),
-          React.createElement(Link, { href: "/about", className: "btn-secondary" }, "Our Story")
+      React.createElement("div", { className: "container relative z-10" },
+        React.createElement("div", { className: "hero-content animate-fade-in" },
+          React.createElement("h1", { className: "hero-title" },
+            "Discover the Art of ",
+            React.createElement("span", { className: "text-gradient" }, "Relaxation")
+          ),
+          React.createElement("p", { className: "hero-subtitle" }, "Premium artisanal coffee and exquisite pastries crafted for the connoisseur."),
+          React.createElement("div", { className: "hero-btns" },
+            React.createElement(Link, { href: "/menu", className: "btn-primary" }, "View Menu"),
+            React.createElement(Link, { href: "/about", className: "btn-secondary" }, "Our Story")
+          )
         )
       ),
       React.createElement("div", { className: "hero-overlay" })

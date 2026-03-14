@@ -113,6 +113,15 @@ section {
   }
 }
 
+@media (min-width: 1920px) {
+  html, body {
+    font-size: 110%; /* Makes 1rem slightly larger on very big screens */
+  }
+  .container {
+    max-width: 1400px;
+  }
+}
+
 /* Utility Classes */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }

@@ -26,8 +26,15 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 4rem;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+@media (min-width: 1920px) {
+  .booking-container {
+    max-width: 1400px;
+  }
 }
 
 @media (min-width: 1024px) {
